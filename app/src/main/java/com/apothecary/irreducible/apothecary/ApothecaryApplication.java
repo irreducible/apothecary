@@ -16,5 +16,12 @@ public class ApothecaryApplication extends Application {
         super.onCreate();
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, YOUR_APPLICATION_ID, YOUR_CLIENT_KEY);
+
+        ParseObject receipt = new ParseObject("Receipt");
+        receipt.put("barcode", "062600142504");
+        receipt.put("name", "Tylenol");
+        receipt.put("count", 24);
+        receipt.put("expiration", 180);
+        receipt.saveInBackground();
     }
 }
