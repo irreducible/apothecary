@@ -15,12 +15,6 @@ public class ApothecaryApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);
-//        ParseObject.registerSubclass(Message.class);
         Parse.initialize(this, YOUR_APPLICATION_ID, YOUR_CLIENT_KEY);
-        
-        // Test creation of object
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
     }
 }
