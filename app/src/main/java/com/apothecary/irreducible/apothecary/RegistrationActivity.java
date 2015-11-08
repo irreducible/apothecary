@@ -52,7 +52,6 @@ public class RegistrationActivity extends AppCompatActivity {
     public void onRegister(View view) {
         ParseUser user = new ParseUser();
 
-        //TODO: Check if username is taken
         String username = etUsername.getText().toString().toLowerCase();
         user.setUsername(username);
 
@@ -77,7 +76,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(RegistrationActivity.this, "Registration unsuccessful. Please try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }
