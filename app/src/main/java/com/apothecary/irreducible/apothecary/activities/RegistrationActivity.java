@@ -1,6 +1,5 @@
-package com.apothecary.irreducible.apothecary;
+package com.apothecary.irreducible.apothecary.activities;
 
-import android.net.ParseException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.apothecary.irreducible.apothecary.R;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 

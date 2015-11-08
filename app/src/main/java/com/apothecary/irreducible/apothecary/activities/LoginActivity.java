@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.apothecary.irreducible.apothecary.R;
-import com.apothecary.irreducible.apothecary.RegistrationActivity;
+import com.apothecary.irreducible.apothecary.activities.RegistrationActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;

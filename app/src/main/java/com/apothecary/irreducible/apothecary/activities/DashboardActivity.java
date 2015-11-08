@@ -12,15 +12,33 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apothecary.irreducible.apothecary.R;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.apothecary.irreducible.apothecary.R;
+import com.apothecary.irreducible.apothecary.models.Medicine;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
-    private String receiptNumber;
     private final int REQUEST_CODE = 100;
+    private ListView lvMedicines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        lvMedicines = (ListView) findViewById(R.id.lvMedicines);
     }
 
     @Override
@@ -52,10 +70,24 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String barcode;
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                receiptNumber = data.getExtras().getString("barcode");
-                Toast.makeText(this, receiptNumber, Toast.LENGTH_SHORT).show();
+                barcode = data.getExtras().getString("barcode");
+                Toast.makeText(this, barcode, Toast.LENGTH_SHORT).show();
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Receipt");
+                query.whereEqualTo("barcode", barcode);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> objects, ParseException e) {
+                        if (e == null) {
+                            ParseObject med = objects.get(0);
+                            Toast.makeText(DashboardActivity.this, med.getString("name"), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(DashboardActivity.this, "Unable to find receipt", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         }
     }
