@@ -53,7 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
         ParseUser user = new ParseUser();
 
         //TODO: Check if username is taken
-        String username = etUsername.getText().toString();
+        String username = etUsername.getText().toString().toLowerCase();
         user.setUsername(username);
 
         String pass = etPassword.getText().toString();

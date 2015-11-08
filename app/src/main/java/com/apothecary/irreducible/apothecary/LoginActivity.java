@@ -3,10 +3,12 @@ package com.apothecary.irreducible.apothecary;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -15,10 +17,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
+
+    private EditText etUsernameMain;
+    private EditText etPasswordMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
         findViewById(R.id.button_sign_in).setOnClickListener(this);
+
+        etUsernameMain = (EditText) findViewById(R.id.etUsernameMain);
+        etPasswordMain = (EditText) findViewById(R.id.etPasswordMain);
     }
 
     @Override
@@ -112,5 +123,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivity(intent);
             }
         });
+    }
+
+    public void onLogin(View view) {
+        String username = etUsernameMain.getText().toString().toLowerCase();
+        String pass = etPasswordMain.getText().toString();
+
+        if (username.length() == 0) {
+            Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
+        }
+        else if (pass.length() == 0) {
+            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            ParseUser.logInInBackground(username, pass, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if (user != null) {
+                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(LoginActivity.this, "Invalid login", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 }
