@@ -11,7 +11,7 @@ The following **required** functionality is completed:
 * [ ] User is **notified** when a medicine is about to expire
 * [x] User can **scan a receipt** via camera and barcode reader and add all medicines
 * [ ] User can **add a medicine manually**
-* [ ] User can **see nearby pharmacies**
+* [x] User can **see nearby pharmacies**
 
 The following **optional** features are implemented:
 
