@@ -4,7 +4,7 @@
 
 The following **required** functionality is completed:
 
-* [ ]	User can **sign in to the app** using registration credentials
+* [x]	User can **sign in to the app** using registration credentials (implemented using Parse)
 * [x] User can **sign in to the app** using OAuth login
 * [ ]	User can **view currently active medicines**
 * [ ] User is displayed the medicine name, quantity, dosage and expiration for every medicine
