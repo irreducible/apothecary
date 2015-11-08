@@ -1,6 +1,10 @@
 package com.apothecary.irreducible.apothecary;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,12 +12,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 public class DashboardActivity extends AppCompatActivity {
     private String receiptNumber;
-    public final int REQUEST_CODE = 100;
+    private final int REQUEST_CODE = 100;
+    private final int REQUEST_PLACE_PICKER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +66,22 @@ public class DashboardActivity extends AppCompatActivity {
                 receiptNumber = data.getExtras().getString("barcode");
                 Toast.makeText(this, receiptNumber, Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public void searchNearby(MenuItem item) {
+        LocationManager locMgr  = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        try {
+            Location recentLoc = locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double lat = recentLoc.getLatitude();
+            double lon = recentLoc.getLongitude();
+            String geoURI = String.format("geo:%f,%f?q=pharmacy", lat, lon);
+            Uri geo = Uri.parse(geoURI);
+            Intent geoMap = new Intent(Intent.ACTION_VIEW, geo);
+            startActivity(geoMap);
+        }
+        catch (SecurityException e) {
+            Toast.makeText(this, "App needs permission to show nearby pharmacies", Toast.LENGTH_SHORT).show();
         }
     }
 }
