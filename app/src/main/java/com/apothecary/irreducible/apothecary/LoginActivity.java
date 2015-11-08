@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -101,4 +102,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    public void onCreateUser(View view) {
+        Button btCreateUser = (Button) findViewById(R.id.btCreateUser);
+
+        btCreateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

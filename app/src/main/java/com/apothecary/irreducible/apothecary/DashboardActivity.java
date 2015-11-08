@@ -5,26 +5,17 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
-
-import me.dm7.barcodescanner.zbar.Result;
-import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 public class DashboardActivity extends AppCompatActivity {
     private String receiptNumber;
     private final int REQUEST_CODE = 100;
-    private final int REQUEST_PLACE_PICKER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
             startActivity(geoMap);
         }
         catch (SecurityException e) {
-            Toast.makeText(this, "App needs permission to show nearby pharmacies", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Apothecary needs permission to show nearby pharmacies", Toast.LENGTH_SHORT).show();
         }
     }
 }
