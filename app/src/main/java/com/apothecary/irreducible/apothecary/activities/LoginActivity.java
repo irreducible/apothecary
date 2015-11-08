@@ -1,9 +1,8 @@
-package com.apothecary.irreducible.apothecary;
+package com.apothecary.irreducible.apothecary.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.apothecary.irreducible.apothecary.R;
+import com.apothecary.irreducible.apothecary.RegistrationActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -142,8 +143,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     if (user != null) {
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(LoginActivity.this, "Invalid login", Toast.LENGTH_SHORT).show();
                     }
                 }

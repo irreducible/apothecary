@@ -1,11 +1,12 @@
-package com.apothecary.irreducible.apothecary;
+package com.apothecary.irreducible.apothecary.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.apothecary.irreducible.apothecary.R;
 
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
