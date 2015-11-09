@@ -32,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 100;
     private final int ADD_REQUEST_CODE = 200;
     private ListView lvMedicines;
-    private ParseUser parseUser;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         lvMedicines = (ListView) findViewById(R.id.lvMedicines);
 
-        parseUser = ParseUser.getCurrentUser();
+        username = getIntent().getStringExtra("username");
     }
 
     @Override
@@ -118,7 +118,7 @@ public class DashboardActivity extends AppCompatActivity {
 //        startActivity(i);
 
         FragmentManager fm = getSupportFragmentManager();
-        AddPrescriptionDialog filterDialog = AddPrescriptionDialog.newInstance("Add Prescription",parseUser.getUsername());
+        AddPrescriptionDialog filterDialog = AddPrescriptionDialog.newInstance("Add Prescription", username);
          filterDialog.show(fm,"prescription_item");
     }
 }

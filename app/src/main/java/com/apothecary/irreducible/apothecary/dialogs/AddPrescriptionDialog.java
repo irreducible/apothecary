@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.apothecary.irreducible.apothecary.R;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 /**
  * Created by akulka2 on 11/8/15.
@@ -59,21 +60,22 @@ public class AddPrescriptionDialog extends DialogFragment {
         String title = getArguments().getString("title");
         getDialog().setTitle(title);
 
+//        userName = ParseUser.getCurrentUser().getUsername();
         userName = getArguments().getString("username");
         // getDialog().getWindow().setSoftInputMode(
         //        WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        ((Button) view.findViewById(R.id.btnSaveMedicine)).setOnClickListener(new View.OnClickListener() {
+                ((Button) view.findViewById(R.id.btnSaveMedicine)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // When button is clicked, call up to owning activity.
 
-                    ParseObject prescription = new ParseObject("User_Medicines");
+                ParseObject prescription = new ParseObject("User_Medicines");
 
-                    prescription.put("userName", userName);
-                    prescription.put("name", etMedName.getText().toString());
-                    prescription.put("quantity", etMedQty.getText().toString());
-                    prescription.put("doses", etMedDoses.getText().toString());
-                    prescription.put("expiryDate",etExpiryDate.getText().toString());
-                    prescription.saveInBackground();
+                prescription.put("userName", userName);
+                prescription.put("name", etMedName.getText().toString());
+                prescription.put("quantity", etMedQty.getText().toString());
+                prescription.put("doses", etMedDoses.getText().toString());
+//                    prescription.put("expiryDate",etExpiryDate.getText().toString());
+                prescription.saveInBackground();
 
                 dismiss();
 

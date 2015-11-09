@@ -108,16 +108,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
             ParseUser user = new ParseUser();
-            user.setUsername(acct.getEmail());
+            final String username = acct.getEmail();
+            user.setUsername(username);
             user.setPassword(randomUUID().toString());
             user.signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(ParseException e) {
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
                 }
             });
+
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
         } else {
             // Signed out, show unauthenticated UI.
@@ -153,6 +156,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                        intent.putExtra("username", user.getUsername());
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid login", Toast.LENGTH_SHORT).show();
