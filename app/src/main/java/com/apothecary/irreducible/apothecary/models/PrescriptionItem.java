@@ -8,6 +8,7 @@ public class PrescriptionItem {
     private String name;
     private String quantity;
     private String doses;
+    private String expiration;
 
     public String getName() {
         return name;
@@ -31,5 +32,13 @@ public class PrescriptionItem {
 
     public void setDoses(String doses) {
         this.doses = doses;
+    }
+
+    public String getExpiration() {
+        return expiration;
+    }
+
+    public void setExpiration(String expiration) {
+        this.expiration = expiration;
     }
 }

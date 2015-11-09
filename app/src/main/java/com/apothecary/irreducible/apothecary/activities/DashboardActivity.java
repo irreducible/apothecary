@@ -12,21 +12,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apothecary.irreducible.apothecary.R;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.apothecary.irreducible.apothecary.R;
-import com.apothecary.irreducible.apothecary.models.Medicine;
+import android.widget.ListView;
+
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -106,5 +99,8 @@ public class DashboardActivity extends AppCompatActivity {
         catch (SecurityException e) {
             Toast.makeText(this, "Apothecary needs permission to show nearby pharmacies", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void addPrescription(MenuItem item) {
     }
 }

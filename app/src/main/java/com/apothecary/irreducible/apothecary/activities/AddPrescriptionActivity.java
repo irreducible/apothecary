@@ -62,6 +62,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         item.setName("");
         item.setQuantity("");
         item.setDoses("");
+        item.setExpiration("");
         items.add(item);
         prescriptionItemAdapter.notifyDataSetChanged();
     }

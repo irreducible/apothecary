@@ -12,6 +12,14 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/add_prescription"
+        android:icon="@drawable/ic_action_add"
+        android:onClick="addPrescription"
+        android:orderInCategory="100"
+        android:title="@string/action_scan"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/search_nearby"
         android:icon="@drawable/ic_location"
         android:onClick="searchNearby"
