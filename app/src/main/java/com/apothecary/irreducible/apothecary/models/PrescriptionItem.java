@@ -1,14 +1,18 @@
 package com.apothecary.irreducible.apothecary.models;
 
+import java.io.Serializable;
+
 /**
  * Created by akulka2 on 11/7/15.
  */
-public class PrescriptionItem {
+public class PrescriptionItem implements Serializable{
+
+    private static final long serialVersionUID = -7588193839330546400L;
 
     private String name;
     private String quantity;
     private String doses;
-    private String expiration;
+    private String expiryDate;
 
     public String getName() {
         return name;
@@ -34,11 +38,11 @@ public class PrescriptionItem {
         this.doses = doses;
     }
 
-    public String getExpiration() {
-        return expiration;
+    public String getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setExpiration(String expiration) {
-        this.expiration = expiration;
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 }

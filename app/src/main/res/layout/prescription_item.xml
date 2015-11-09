@@ -1,70 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:gravity="center"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:layout_height="wrap_content">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medicine_name_label"
-        android:id="@+id/tvMedName"
-        android:layout_above="@+id/etMedicineQty"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/etMedicineQty"
-        android:layout_toStartOf="@+id/etMedicineQty" />
+        android:layout_height="50dp"
+        android:id="@+id/rlMedNameLayout">
 
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/etMedicineName"
-        android:layout_alignParentTop="true"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medicine_name_label"
+            android:id="@+id/tvMedName"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etMedicineName"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/rlMedNameLayout"
+        android:id="@+id/rlMedQtyLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/tvMedName"
-        android:layout_toRightOf="@+id/tvMedName" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medicine_qty"
+            android:id="@+id/tvMedQty"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
 
-    <EditText
-        android:layout_width="100dp"
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etMedicineQty"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/rlMedDoseLayout"
+        android:layout_below="@id/rlMedQtyLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medicine_dose_label"
+            android:id="@+id/tvMedDoses"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etDosePerDay"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etMedicineQty"
-        android:layout_below="@+id/etMedicineName"
-        android:layout_toLeftOf="@+id/etDosePerDay"
-        android:layout_marginRight="90dp"
-        android:layout_marginEnd="90dp" />
+        android:text="@string/cancel_prescription_item_label"
+        android:id="@+id/btnCancelMedicine"
+        android:layout_below="@+id/rlMedDoseLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="100dp"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etDosePerDay"
-        android:layout_alignTop="@+id/etMedicineQty"
+        android:text="@string/save_prescription_button_label"
+        android:id="@+id/btnSaveMedicine"
+        android:onClick="addMedicineItem"
+        android:layout_below="@+id/rlMedDoseLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medicine_qty"
-        android:id="@+id/tvMedQty"
-        android:layout_alignBottom="@+id/etMedicineQty"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvMedName"
-        android:gravity="center"
-        android:layout_toStartOf="@+id/etMedicineQty"
-        android:layout_toLeftOf="@+id/etMedicineQty" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medicine_dose_label"
-        android:id="@+id/tvMedDoses"
-        android:gravity="center"
-        android:layout_alignBottom="@+id/etMedicineQty"
-        android:layout_below="@+id/etMedicineName"
-        android:layout_toLeftOf="@+id/etDosePerDay" />
 </RelativeLayout>

@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -15,23 +17,30 @@ import com.apothecary.irreducible.apothecary.R;
 
 import android.widget.ListView;
 
+import com.apothecary.irreducible.apothecary.dialogs.AddPrescriptionDialog;
+import com.apothecary.irreducible.apothecary.models.PrescriptionItem;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 100;
+    private final int ADD_REQUEST_CODE = 200;
     private ListView lvMedicines;
+    private ParseUser parseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         lvMedicines = (ListView) findViewById(R.id.lvMedicines);
+
+        parseUser = ParseUser.getCurrentUser();
     }
 
     @Override
@@ -102,5 +111,14 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void addPrescription(MenuItem item) {
+
+//        Intent i = new Intent(this, AddPrescriptionActivity.class);
+//        i.putExtra("operation","add");
+//        i.putExtra("userName",parseUser.getUsername());
+//        startActivity(i);
+
+        FragmentManager fm = getSupportFragmentManager();
+        AddPrescriptionDialog filterDialog = AddPrescriptionDialog.newInstance("Add Prescription",parseUser.getUsername());
+         filterDialog.show(fm,"prescription_item");
     }
 }

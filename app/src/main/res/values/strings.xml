@@ -15,5 +15,7 @@
     <string name="medicine_dose_label">Dose/day</string>
     <string name="title_activity_add_prescription">AddPrescriptionActivity</string>
     <string name="add_prescription_item_label">Add</string>
-
+    <string name="save_prescription_button_label">Save</string>
+    <string name="expiry_date_label">Expiry Date</string>
+    <string name="cancel_prescription_item_label">Cancel</string>
 </resources>
