@@ -21,6 +21,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import static java.util.UUID.randomUUID;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     GoogleApiClient mGoogleApiClient;
@@ -107,6 +110,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             GoogleSignInAccount acct = result.getSignInAccount();
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
+            ParseUser user = new ParseUser();
+            user.setUsername(acct.getEmail());
+            user.setPassword(randomUUID().toString());
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(ParseException e) {
+                }
+            });
             Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show();
         } else {
             // Signed out, show unauthenticated UI.
