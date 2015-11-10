@@ -25,6 +25,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,8 +84,12 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void done(List<ParseObject> objects, ParseException e) {
                         if (e == null) {
-                            ParseObject med = objects.get(0);
-                            Toast.makeText(DashboardActivity.this, med.getString("name"), Toast.LENGTH_SHORT).show();
+                            //ParseObject med = objects.get(0);
+                            //Toast.makeText(DashboardActivity.this, med.getString("name"), Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(DashboardActivity.this,AddPrescriptionActivity.class);
+                            i.putExtra("prescriptionItems", (Serializable) objects);
+                            i.putExtra("userName",username);
+                            startActivity(i);
                         } else {
                             Toast.makeText(DashboardActivity.this, "Unable to find receipt", Toast.LENGTH_SHORT).show();
                         }
@@ -112,13 +117,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     public void addPrescription(MenuItem item) {
 
-//        Intent i = new Intent(this, AddPrescriptionActivity.class);
-//        i.putExtra("operation","add");
-//        i.putExtra("userName",parseUser.getUsername());
-//        startActivity(i);
-
         FragmentManager fm = getSupportFragmentManager();
         AddPrescriptionDialog filterDialog = AddPrescriptionDialog.newInstance("Add Prescription", username);
-         filterDialog.show(fm,"prescription_item");
+        filterDialog.show(fm,"prescription_item");
     }
 }

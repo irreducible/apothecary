@@ -40,13 +40,13 @@ public class PrescriptionItemAdapter extends ArrayAdapter<PrescriptionItem> {
         final ViewHolder viewHolder;
         if(convertView == null){
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.prescription_item,parent,false);
-            viewHolder.tvMedName = (TextView)convertView.findViewById(R.id.tvMedName);
-          //  viewHolder.tvMedQty = (TextView)convertView.findViewById(R.id.tvMedQty);
-           // viewHolder.tvMedDoses = (TextView) convertView.findViewById(R.id.tvMedDoses);
-            viewHolder.etMedName = (EditText) convertView.findViewById(R.id.etMedicineName);
-           // viewHolder.etMedQty = (EditText) convertView.findViewById(R.id.etMedicineQty);
-           // viewHolder.etMedDoses = (EditText) convertView.findViewById(R.id.etDosePerDay);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.medicine_item,parent,false);
+            viewHolder.tvMedName = (TextView)convertView.findViewById(R.id.tvMedItemName);
+            viewHolder.tvMedQty = (TextView)convertView.findViewById(R.id.tvMedItemQty);
+            viewHolder.tvMedDoses = (TextView) convertView.findViewById(R.id.tvMedItemQty);
+            viewHolder.etMedName = (EditText) convertView.findViewById(R.id.etMedItemName);
+            viewHolder.etMedQty = (EditText) convertView.findViewById(R.id.etMedItemQty);
+            viewHolder.etMedDoses = (EditText) convertView.findViewById(R.id.etMedItemDosePerDay);
            // viewHolder.tvExpiryDate = (TextView) convertView.findViewById(R.id.tvExpiryDate);
            // viewHolder.etExpiryDate = (EditText) convertView.findViewById(R.id.etExpiryDate);
             convertView.setTag(viewHolder);
@@ -54,9 +54,9 @@ public class PrescriptionItemAdapter extends ArrayAdapter<PrescriptionItem> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-       // viewHolder.etMedName.setText(prescriptionItem.getName());
-       // viewHolder.etMedQty.setText(prescriptionItem.getQuantity());
-       // viewHolder.etMedDoses.setText(prescriptionItem.getDoses());
+        viewHolder.etMedName.setText(prescriptionItem.getName());
+        viewHolder.etMedQty.setText(prescriptionItem.getQuantity());
+        viewHolder.etMedDoses.setText(prescriptionItem.getDoses());
        // viewHolder.etExpiryDate.setText(prescriptionItem.getExpiryDate());
         return convertView;
     }

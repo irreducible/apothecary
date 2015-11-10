@@ -60,11 +60,10 @@ public class AddPrescriptionDialog extends DialogFragment {
         String title = getArguments().getString("title");
         getDialog().setTitle(title);
 
-//        userName = ParseUser.getCurrentUser().getUsername();
         userName = getArguments().getString("username");
         // getDialog().getWindow().setSoftInputMode(
         //        WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                ((Button) view.findViewById(R.id.btnSaveMedicine)).setOnClickListener(new View.OnClickListener() {
+        ((Button) view.findViewById(R.id.btnSaveMedicine)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // When button is clicked, call up to owning activity.
 
@@ -74,7 +73,7 @@ public class AddPrescriptionDialog extends DialogFragment {
                 prescription.put("name", etMedName.getText().toString());
                 prescription.put("quantity", etMedQty.getText().toString());
                 prescription.put("doses", etMedDoses.getText().toString());
-//                    prescription.put("expiryDate",etExpiryDate.getText().toString());
+//              prescription.put("expiryDate",etExpiryDate.getText().toString());
                 prescription.saveInBackground();
 
                 dismiss();

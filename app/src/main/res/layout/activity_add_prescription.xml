@@ -7,23 +7,12 @@
     tools:context="com.apothecary.irreducible.apothecary.activities.AddPrescriptionActivity">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_prescription_item_label"
-        android:id="@+id/btnAddItem"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="addPrescriptionItem"/>
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvPrescriptionList"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnAddItem"
         android:descendantFocusability="beforeDescendants"
         android:layout_above="@+id/btnSavePrescription" />
 

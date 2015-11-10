@@ -16,6 +16,7 @@ import com.apothecary.irreducible.apothecary.models.PrescriptionItem;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddPrescriptionActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class AddPrescriptionActivity extends AppCompatActivity {
     private ArrayList<PrescriptionItem> items;
     private PrescriptionItemAdapter prescriptionItemAdapter;
     private String userName;
+    private List<ParseObject> parseObjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +35,25 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         prescriptionItemAdapter = new PrescriptionItemAdapter(this,items);
         lvPrescriptionList.setAdapter(prescriptionItemAdapter);
         Intent i = getIntent();
-        String operation = i.getStringExtra("operation");
-         userName = i.getStringExtra("userName");
-        if(operation.equals("add")){
-            addItem();
-        }
+        parseObjects = (List<ParseObject>)i.getSerializableExtra("prescriptionItems");
+        userName = i.getStringExtra("userName");
+        populateViews();
     }
 
     private void setupViews(){
         lvPrescriptionList = (ListView) findViewById(R.id.lvPrescriptionList);
+    }
+
+    private void populateViews(){
+        for(ParseObject parseObject:parseObjects){
+            PrescriptionItem item = new PrescriptionItem();
+            item.setName(parseObject.getString("name"));
+            item.setQuantity(parseObject.getString("quantity"));
+            item.setDoses(parseObject.getString("doses"));
+            //item.setExpiryDate(parseObject.getString("expiryDate"));
+            items.add(item);
+            prescriptionItemAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -68,30 +80,20 @@ public class AddPrescriptionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addPrescriptionItem(View view) {
-        addItem();
-    }
-
-    private void addItem(){
-        PrescriptionItem item = new PrescriptionItem();
-        items.add(item);
-        prescriptionItemAdapter.notifyDataSetChanged();
-    }
-
     public void savePrescription(View view) {
 
         Log.i("INFO", "Saving Result to User Medicines");
         for(int i=0;i<items.size();i++) {
             View v = lvPrescriptionList.getChildAt(i);
             ParseObject prescription = new ParseObject("User_Medicines");
-            EditText etMedName = (EditText) v.findViewById(R.id.etMedicineName);
-            //EditText etMedQty = (EditText) v.findViewById(R.id.etMedicineQty);
-            //EditText etMedDoses = (EditText) v.findViewById(R.id.etDosePerDay);
+            EditText etMedName = (EditText) v.findViewById(R.id.etMedItemName);
+            EditText etMedQty = (EditText) v.findViewById(R.id.etMedItemQty);
+            EditText etMedDoses = (EditText) v.findViewById(R.id.etMedItemDosePerDay);
             //EditText etExpiryDate = (EditText) v.findViewById(R.id.etExpiryDate);
             prescription.put("userName", userName);
             prescription.put("name", etMedName.getText().toString());
-            //prescription.put("quantity", etMedQty.getText().toString());
-            //prescription.put("doses", etMedDoses.getText().toString());
+            prescription.put("quantity", etMedQty.getText().toString());
+            prescription.put("doses", etMedDoses.getText().toString());
             //prescription.put("expiryDate",etExpiryDate.getText().toString());
             prescription.saveInBackground();
         }
