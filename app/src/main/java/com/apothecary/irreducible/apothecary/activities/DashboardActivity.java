@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apothecary.irreducible.apothecary.R;
+import com.apothecary.irreducible.apothecary.adapters.DashboardItemAdapter;
 
 import android.widget.ListView;
 
@@ -33,7 +34,9 @@ public class DashboardActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 100;
     private final int ADD_REQUEST_CODE = 200;
     private ListView lvMedicines;
+    private DashboardItemAdapter aMedicines;
     private String username;
+    private ArrayList<PrescriptionItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,29 @@ public class DashboardActivity extends AppCompatActivity {
         lvMedicines = (ListView) findViewById(R.id.lvMedicines);
 
         username = getIntent().getStringExtra("username");
+
+        lvMedicines = (ListView) findViewById(R.id.lvMedicines);
+        items = new ArrayList<>();
+        aMedicines = new DashboardItemAdapter(this, items);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("User_Medicines");
+        query.whereEqualTo("userName", username);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject object: objects) {
+                        PrescriptionItem item = new PrescriptionItem();
+                        item.setName(object.getString("name"));
+                        items.add(item);
+                    }
+                    lvMedicines.setAdapter(aMedicines);
+                    Toast.makeText(DashboardActivity.this, "Succesfully added medicines", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DashboardActivity.this, "Unable to find user", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
